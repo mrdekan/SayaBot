@@ -6,7 +6,7 @@
 .pnp.js
 
 # dotenv environment variables file
-env/.env
+.env
 .env.test
 /env
 # testing

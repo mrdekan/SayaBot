@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "discord.js": "^14.7.1"
+  },
+  "name": "sayabot",
+  "description": "Discord bot Saya",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "devDependencies": {
+    "dotenv": "^16.0.3",
+    "nodemon": "^2.0.20"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "nodemon ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrdekan/SayaBot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrdekan/SayaBot/issues"
+  },
+  "homepage": "https://github.com/mrdekan/SayaBot#readme"
+}

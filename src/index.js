@@ -13,6 +13,18 @@ const CLIENT_ID = process.env.SAYA_ID;
 const rest = new REST({ version: '10' }).setToken(TOKEN);
 client.login(TOKEN);
 client.once('ready', ()=> {console.log("I`m online!")});
+client.on('interactionCreate', async(interaction)=>{
+    if(interaction.isChatInputCommand()){
+        if(interaction.commandName==='ping')
+            await interaction.reply({content: 'Hello world!!!'});
+        else if(interaction.commandName==='order')
+            await interaction.reply({content: `You ordered ${interaction.options.get('food').value}`})
+    }
+
+});
+
+
+
 
 async function main() {
     const commands = [
@@ -23,6 +35,12 @@ async function main() {
         {
             name: 'order',
             description: 'Order something...',
+            options:[{
+                name: 'food',
+                description: 'the type of food',
+                type: 3,
+                required: true,
+            }]
         },
     ];
 
@@ -31,7 +49,7 @@ async function main() {
         await rest.put(Routes.applicationCommands(CLIENT_ID), {
             body: commands,
         });
-        client.login(TOKEN);
+        //client.login(TOKEN);
     } catch (err) {
         console.log(err);
     }

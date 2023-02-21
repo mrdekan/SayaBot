@@ -1,7 +1,8 @@
 import { config } from 'dotenv'
 import {Client, GatewayIntentBits, Routes} from 'discord.js';
 import { REST } from '@discordjs/rest';
-
+import { joinVoiceChannel } from '@discordjs/voice';
+//const { joinVoiceChannel } = require('@discordjs/voice');
 config();
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds,
@@ -20,7 +21,6 @@ client.on('interactionCreate', async(interaction)=>{
         else if(interaction.commandName==='order')
             await interaction.reply({content: `You ordered ${interaction.options.get('food').value}`})
     }
-
 });
 
 

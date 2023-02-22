@@ -1,8 +1,11 @@
 import {config} from 'dotenv'
 import {Client, GatewayIntentBits, Routes} from 'discord.js';
 import {REST} from '@discordjs/rest';
-import {SlashCommandBuilder} from '@discordjs/builders';
-//const { joinVoiceChannel } = require('@discordjs/voice');
+
+import orderCommand from './commands/order.js';
+import helloCommand from './commands/hello.js';
+import rolesCommand from "./commands/addRole.js";
+import userHelloCommand from "./commands/helloToUser.js";
 config();
 
 const client = new Client({
@@ -34,43 +37,25 @@ client.on('interactionCreate', async (interaction) => {
             } catch (err) {
             }
             if (food !== "" && drink !== "")
-                await interaction.reply({content: `You ordered ${interaction.options.get('food').value} and ${interaction.options.get('drink').value}`})
+                await interaction.reply({content: `You ordered ${food} and ${drink}`})
             else if (food !== "")
-                await interaction.reply({content: `You ordered ${interaction.options.get('food').value}`})
+                await interaction.reply({content: `You ordered ${food}`})
             else if (drink !== "")
-                await interaction.reply({content: `You ordered ${interaction.options.get('drink').value}`})
+                await interaction.reply({content: `You ordered ${drink}`})
+        }
+        else if(interaction.commandName==='sayhello'){
+            let user = client.users.cache.get(interaction.options.get('user').value);
+            await interaction.reply({content: `Hello ${user}!`})
         }
     }
 });
 
 
 async function main() {
-    const orderCommand = new SlashCommandBuilder()
-        .setName('order')
-        .setDescription('Order your favorite meal')
-        .addStringOption((option) =>
-            option
-                .setName('food')
-                .setDescription('Select your favourite food')
-                .addChoices(
-                    {name: 'Cake', value: 'cake'},
-                           {name: 'Cookie',value: 'cookie'},
-                )
-                .setRequired(false))
-        .addStringOption((option) =>
-            option
-                .setName('drink')
-                .setDescription('Select your favourite drink')
-                .addChoices(
-                    {name: 'Coffee', value: 'Coffee'},
-                    {name: 'Milk',value: 'milk'},
-                )
-                .setRequired(false));
-    const helloCommand = new SlashCommandBuilder()
-        .setName('hello')
-        .setDescription('Say "Hello" to Saya!');
-    const commands = [orderCommand.toJSON()];
-    console.log(orderCommand.toJSON());
+
+
+    const commands = [orderCommand, helloCommand, rolesCommand, userHelloCommand];
+    //console.log(orderCommand.toJSON());
     try {
         console.log('Started refreshing application (/) commands.');
         await rest.put(Routes.applicationCommands(CLIENT_ID), {

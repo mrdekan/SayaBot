@@ -52,10 +52,7 @@ client.on('interactionCreate', async (interaction) => {
 
 
 async function main() {
-
-
     const commands = [orderCommand, helloCommand, rolesCommand, userHelloCommand];
-    //console.log(orderCommand.toJSON());
     try {
         console.log('Started refreshing application (/) commands.');
         await rest.put(Routes.applicationCommands(CLIENT_ID), {

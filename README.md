@@ -1,3 +1,3 @@
 # SayaBot
-![alt text](img/avatar.jpg)
+![alt text](img/avatar.jpg)  
 Discord bot Saya
